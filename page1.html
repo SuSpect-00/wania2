@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>I Love You Wania 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    /* --- Background --- */
+    body {
+      margin: 0;
+      height: 100vh;
+      background: radial-gradient(circle at top, #ffb6c1, #000010 70%);
+      overflow: hidden;
+      font-family: "Poppins", system-ui, sans-serif;
+    }
+
+    /* --- Floating Links --- */
+    .quick-link {
+      position: fixed;
+      right: 10px;
+      width: 35px;
+      height: 35px;
+      z-index: 999;
+      background: #696969;
+      border-radius: 50%;
+      text-align: center;
+      color: #fff;
+      line-height: 35px;
+      text-decoration: none;
+      font-size: 13px;
+      transition: 0.3s;
+    }
+    .quick-link:hover {
+      background: #ff1493;
+      box-shadow: 0 0 10px #ff69b4;
+    }
+    .quick-link:nth-of-type(1) { top: 10%; }
+    .quick-link:nth-of-type(2) { top: 4%;  z-index: 998; }
+    .quick-link:nth-of-type(3) { top: 16%; z-index: 997; }
+    .quick-link:nth-of-type(4) { top: 22%; z-index: 996; }
+
+    /* --- Love Floating Words --- */
+    #ui .love {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -225px 0 0 -225px;
+      --i: 1;
+    }
+
+    #ui .love_word {
+      color: #ff80c0;
+      font-size: 1.4rem;
+      transform: translateY(-100%) rotateZ(-30deg);
+      text-shadow: 0 0 10px #fff, 0 0 20px #ff69b4;
+      letter-spacing: 2px;
+      white-space: nowrap;
+      animation: flicker 3s infinite ease-in-out;
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; text-shadow: 0 0 15px #ff99cc, 0 0 30px #fff; }
+      50% { opacity: 0.6; text-shadow: 0 0 5px #ff1493; }
+    }
+
+    #ui .love_horizontal {
+      animation: horizontal 10s infinite alternate ease-in-out;
+      animation-delay: calc(var(--i) * -300ms);
+    }
+
+    #ui .love_vertical {
+      animation: vertical 20s infinite linear;
+      animation-delay: calc(var(--i) * -300ms);
+    }
+
+    /* --- Center Text --- */
+    .center-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff0f5;
+      font-size: 3rem;
+      font-weight: bold;
+      text-shadow: 0 0 20px #ff69b4, 0 0 40px #ff1493, 0 0 80px #fff;
+      animation: glow 2s ease-in-out infinite alternate, pulse 3s infinite ease-in-out;
+      z-index: 1000;
+      white-space: nowrap;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #ff80c0, 0 0 20px #ff1493; }
+      to { text-shadow: 0 0 30px #fff, 0 0 60px #ff69b4; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.1); }
+    }
+
+    /* --- Floating Hearts --- */
+    .heart {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background: #ff4da6;
+      transform: rotate(45deg);
+      animation: floatHearts 10s linear infinite;
+      opacity: 0.7;
+    }
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background: #ff4da6;
+      border-radius: 50%;
+    }
+    .heart::before { top: -7.5px; left: 0; }
+    .heart::after { left: -7.5px; top: 0; }
+
+    @keyframes floatHearts {
+      0% { transform: translateY(100vh) rotate(45deg); opacity: 0; }
+      20% { opacity: 1; }
+      100% { transform: translateY(-10vh) rotate(45deg); opacity: 0; }
+    }
+
+    /* --- Animations --- */
+    @keyframes horizontal {
+      from { transform: translateX(0px); }
+      to   { transform: translateX(450px); }
+    }
+    @keyframes vertical {
+      0%   { transform: translateY(180px); }
+      25%  { transform: translateY(60px); }
+      50%  { transform: translateY(180px); }
+      75%  { transform: translateY(420px); }
+      100% { transform: translateY(180px); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Quick Links -->
+  <a href="#" class="quick-link" title="Create">💌</a>
+  <a href="#" class="quick-link" title="More">✨</a>
+  <a href="#" class="quick-link" title="Code">💻</a>
+  <a href="#" class="quick-link" title="Gift">🎁</a>
+
+  <!-- Floating Love Animation -->
+  <div id="ui"></div>
+
+  <!-- Center text -->
+  <div class="center-text">I love you Wania 💞</div>
+
+  <script>
+    const N = 100;
+    const ui = document.getElementById('ui');
+
+    for (let i = 1; i <= N; i++) {
+      const love = document.createElement('div');
+      love.className = 'love';
+      love.style.setProperty('--i', i);
+
+      const h = document.createElement('div');
+      h.className = 'love_horizontal';
+
+      const v = document.createElement('div');
+      v.className = 'love_vertical';
+
+      const word = document.createElement('div');
+      word.className = 'love_word';
+      word.textContent = 'I love you 💖';
+
+      v.appendChild(word);
+      h.appendChild(v);
+      love.appendChild(h);
+      ui.appendChild(love);
+    }
+
+    // Floating hearts
+    for (let i = 0; i < 30; i++) {
+      let heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (6 + Math.random() * 6) + 's';
+      heart.style.width = heart.style.height = (10 + Math.random() * 20) + 'px';
+      document.body.appendChild(heart);
+    }
+  </script>
+</body>
+</html>
